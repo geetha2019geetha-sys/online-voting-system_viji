@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cast Your Vote</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+
+    /* BACKGROUND */
+    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+    url("{{ url_for('static', filename='votebg.jpg') }}");
+    background-size:cover;
+    background-position:center;
+
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+/* ===== HEADING ===== */
+.page-title{
+    font-size:42px;
+    font-weight:bold;
+    color:white;
+    margin-bottom:40px;
+    background:rgba(0,0,0,0.4);
+    padding:15px 40px;
+    border-radius:20px;
+    backdrop-filter:blur(6px);
+}
+
+/* ===== PARTY ROW ===== */
+.party-row{
+    display:flex;
+    gap:30px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+/* ===== PARTY CARD ===== */
+.party-card{
+    background:rgba(255,255,255,0.95);
+    padding:20px;
+    border-radius:20px;
+    width:150px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,0.4);
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.party-card:hover{
+    transform:scale(1.08);
+    background:#f1f5ff;
+}
+
+/* PARTY IMAGE */
+.party-card img{
+    width:100px;
+    height:100px;
+    object-fit:contain;
+    margin-bottom:10px;
+}
+
+/* PARTY NAME */
+.party-card label{
+    font-size:18px;
+    font-weight:bold;
+    display:block;
+    margin-bottom:10px;
+}
+
+/* RADIO BUTTON BIG */
+.party-card input{
+    transform:scale(1.5);
+}
+
+/* SUBMIT BUTTON */
+button{
+    margin-top:40px;
+    padding:15px 60px;
+    font-size:20px;
+    border:none;
+    border-radius:30px;
+    background:#28a745;
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#1e7e34;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADING -->
+<div class="page-title">
+    🗳️ Cast Your Vote
+</div>
+
+<form method="POST">
+
+<div class="party-row">
+
+    <!-- DMK -->
+    <div class="party-card">
+        <a href='https://postimg.cc/yg77stPB' target='_blank'><img src='https://i.postimg.cc/yg77stPB/dmk.jpg' border='0' alt='dmk'></a>
+        <label>DMK</label>
+        <input type="radio" name="party" value="DMK" required>
+    </div>
+
+    <!-- AIADMK -->
+    <div class="party-card">
+        <a href='https://postimg.cc/xkYwzHbH' target='_blank'><img src='https://i.postimg.cc/xkYwzHbH/aiadmk.webp' border='0' alt='aiadmk'></a>
+        <label>AIADMK</label>
+        <input type="radio" name="party" value="ADMK">
+    </div>
+
+    <!-- BJP -->
+    <div class="party-card">
+        <a href='https://postimg.cc/LJrXKxwS' target='_blank'><img src='https://i.postimg.cc/LJrXKxwS/BJP.png' border='0' alt='BJP'></a>
+        <label>BJP</label>
+        <input type="radio" name="party" value="BJP">
+    </div>
+
+    <!-- Congress -->
+    <div class="party-card">
+        <a href='https://postimg.cc/xXbfRKCR' target='_blank'><img src='https://i.postimg.cc/xXbfRKCR/congress.png' border='0' alt='congress'></a>
+        <label>Congress</label>
+        <input type="radio" name="party" value="Congress">
+    </div>
+
+    <!-- NTK -->
+    <div class="party-card">
+        <a href='https://postimg.cc/NLrHKr8r' target='_blank'><img src='https://i.postimg.cc/NLrHKr8r/ntk.webp' border='0' alt='ntk'></a>
+        <label>NTK</label>
+        <input type="radio" name="party" value="NTK">
+    </div>
+
+    <!-- TVK -->
+    <div class="party-card">
+        <a href='https://postimg.cc/MXXhVzXt' target='_blank'><img src='https://i.postimg.cc/MXXhVzXt/tvk.png' border='0' alt='tvk'></a>
+        <label>TVK</label>
+        <input type="radio" name="party" value="TVK">
+    </div>
+    <!-- PMK -->
+<div class="party-card">
+    <a href='https://postimg.cc/Y4bsLP7k' target='_blank'><img src='https://i.postimg.cc/Y4bsLP7k/pmk.webp' border='0' alt='pmk'></a>
+    <label>PMK</label>
+    <input type="radio" name="party" value="PMK">
+</div>
+
+
+</div>
+
+<div style="text-align:center;">
+    <button type="submit">Submit Vote</button>
+</div>
+
+</form>
+
+</body>
+</html>

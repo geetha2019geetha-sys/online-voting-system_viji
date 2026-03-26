@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Voter Registration</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+
+    background-image:url("{{ url_for('static', filename='registerbg.jpg') }}");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:40px 0;
+}
+
+.page-title{
+    font-size:38px;
+    font-weight:bold;
+    color:white;
+    text-align:center;
+    margin-bottom:25px;
+
+    background:rgba(0,0,0,0.35);
+    padding:15px 40px;
+    border-radius:20px;
+    backdrop-filter:blur(6px);
+    box-shadow:0 5px 20px rgba(0,0,0,0.3);
+}
+
+.form-box{
+    background:rgba(255,255,255,0.95);
+    padding:30px 40px;
+    border-radius:15px;
+    width:380px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.3);
+
+    color:black;
+    font-weight:bold;
+}
+
+/* MAKE ALL TEXT INPUTS FULL WIDTH */
+.form-box input[type="text"],
+.form-box input[type="email"],
+.form-box input[type="password"]{
+    width: 100%;
+    box-sizing: border-box;
+    padding:8px;
+    margin-top:5px;
+    border-radius:10px;
+    border:1px solid #ccc;
+}
+
+/* FLEX FIX FOR DIGIT BOXES */
+.digit-group{
+    display:flex;          /* keep in one row */
+    flex-wrap: nowrap;     /* prevent wrapping */
+    gap:5px;               /* space between inputs */
+    overflow-x:auto;       /* scroll if screen too small */
+}
+
+.digit-group input{
+    width:28px;            /* adjust width to fit form */
+    height:35px;
+    text-align:center;
+    font-size:16px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+button{
+    margin-top:15px;
+    width:100%;
+    padding:10px;
+    background:#2d6cdf;
+    color:white;
+    border:none;
+    border-radius:20px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1b4fbf;
+}
+
+p{
+    text-align:center;
+    margin-top:15px;
+}
+
+a{
+    text-decoration:none;
+    color:#2d6cdf;
+    font-weight:bold;
+}
+
+</style>
+
+<script>
+
+/* CURSOR CONTROL & BACKSPACE FIX */
+function moveDigit(current, prevID, nextID, e){
+
+    // If number entered → move next
+    if(current.value.length == 1 && nextID){
+        document.getElementById(nextID).focus();
+    }
+
+    // If backspace → move previous
+    if(e.key === "Backspace" && current.value === "" && prevID){
+        document.getElementById(prevID).focus();
+    }
+}
+
+/* COMBINE NUMBERS BEFORE SUBMIT */
+function combineNumbers(){
+
+    // PHONE
+    let phone = "";
+    for(let i=1;i<=10;i++){
+        phone += document.getElementById("p"+i).value;
+    }
+    document.getElementById("phone").value = phone;
+
+    // AADHAR
+    let aadhar = "";
+    for(let i=1;i<=12;i++){
+        aadhar += document.getElementById("a"+i).value;
+    }
+    document.getElementById("aadhar").value = aadhar;
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div class="page-title">
+    Voter Registration Form
+</div>
+
+<div class="form-box">
+
+<form method="POST" onsubmit="combineNumbers()">
+
+Name:<br>
+<input type="text" name="name" required><br><br>
+
+Email:<br>
+<input type="email" name="email" required><br><br>
+
+Address:<br>
+<input type="text" name="address" required><br><br>
+
+<!-- PHONE BOXES -->
+Phone:<br>
+<div class="digit-group">
+<input id="p1" maxlength="1" onkeyup="moveDigit(this,'','p2',event)" required>
+<input id="p2" maxlength="1" onkeyup="moveDigit(this,'p1','p3',event)" required>
+<input id="p3" maxlength="1" onkeyup="moveDigit(this,'p2','p4',event)" required>
+<input id="p4" maxlength="1" onkeyup="moveDigit(this,'p3','p5',event)" required>
+<input id="p5" maxlength="1" onkeyup="moveDigit(this,'p4','p6',event)" required>
+<input id="p6" maxlength="1" onkeyup="moveDigit(this,'p5','p7',event)" required>
+<input id="p7" maxlength="1" onkeyup="moveDigit(this,'p6','p8',event)" required>
+<input id="p8" maxlength="1" onkeyup="moveDigit(this,'p7','p9',event)" required>
+<input id="p9" maxlength="1" onkeyup="moveDigit(this,'p8','p10',event)" required>
+<input id="p10" maxlength="1" onkeyup="moveDigit(this,'p9','',event)" required>
+</div>
+
+<input type="hidden" name="phone" id="phone">
+
+<br>
+
+<!-- AADHAR BOXES -->
+Aadhar Number:<br>
+<div class="digit-group">
+<input id="a1" maxlength="1" onkeyup="moveDigit(this,'','a2',event)" required>
+<input id="a2" maxlength="1" onkeyup="moveDigit(this,'a1','a3',event)" required>
+<input id="a3" maxlength="1" onkeyup="moveDigit(this,'a2','a4',event)" required>
+<input id="a4" maxlength="1" onkeyup="moveDigit(this,'a3','a5',event)" required>
+<input id="a5" maxlength="1" onkeyup="moveDigit(this,'a4','a6',event)" required>
+<input id="a6" maxlength="1" onkeyup="moveDigit(this,'a5','a7',event)" required>
+<input id="a7" maxlength="1" onkeyup="moveDigit(this,'a6','a8',event)" required>
+<input id="a8" maxlength="1" onkeyup="moveDigit(this,'a7','a9',event)" required>
+<input id="a9" maxlength="1" onkeyup="moveDigit(this,'a8','a10',event)" required>
+<input id="a10" maxlength="1" onkeyup="moveDigit(this,'a9','a11',event)" required>
+<input id="a11" maxlength="1" onkeyup="moveDigit(this,'a10','a12',event)" required>
+<input id="a12" maxlength="1" onkeyup="moveDigit(this,'a11','',event)" required>
+</div>
+
+<input type="hidden" name="aadhar" id="aadhar">
+
+<br>
+
+Voter ID:<br>
+<input type="text" name="voterid"
+maxlength="8"
+pattern="[0-9]{8}"
+required><br><br>
+
+Username:<br>
+<input type="text" name="username" required><br><br>
+
+Password:<br>
+<input type="password" name="password" required><br><br>
+
+<button type="submit">Register</button>
+
+</form>
+
+<p>Already Registered? <a href="/login">Login Here</a></p>
+
+</div>
+
+</body>
+</html>

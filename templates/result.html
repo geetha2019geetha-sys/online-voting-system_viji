@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Results</title>
+</head>
+<body>
+
+<h2>Voting Results</h2>
+
+<table border="1">
+<tr>
+<th>Party</th>
+<th>Votes</th>
+</tr>
+
+{% for party, count in votes.items() %}
+<tr>
+<td>{{party}}</td>
+<td>{{count}}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+<br>
+<a href="/">Logout</a>
+
+</body>
+</html>
